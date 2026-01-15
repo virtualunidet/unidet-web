@@ -4,8 +4,21 @@ import { API_BASE_URL, getJson } from "../services/api";
 
 function buildImageUrl(imagenUrl) {
   if (!imagenUrl) return "";
-  if (imagenUrl.startsWith("http")) return imagenUrl;
-  return `${API_BASE_URL}${imagenUrl}`;
+  const clean = String(imagenUrl).replaceAll("\\", "/");
+  if (clean.startsWith("http")) return clean;
+
+  const base = String(API_BASE_URL || "").replace(/\/$/, "");
+  const path = clean.startsWith("/") ? clean : `/${clean}`;
+  return `${base}${path}`;
+}
+
+function normCat(s) {
+  return (s || "")
+    .toString()
+    .trim()
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
 }
 
 function CourseCard({ course, variant }) {
@@ -34,8 +47,8 @@ function CourseCard({ course, variant }) {
 }
 
 export default function Oferta() {
-  const [esp, setEsp] = useState([]); // especialización
-  const [cortos, setCortos] = useState([]); // cursos cortos
+  const [esp, setEsp] = useState([]);
+  const [cortos, setCortos] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -45,13 +58,24 @@ export default function Oferta() {
       setError("");
 
       try {
-        const [dEsp, dCorto] = await Promise.all([
-          getJson("/courses?category=especializacion"),
-          getJson("/courses?category=corto"),
-        ]);
+        const data = await getJson("/courses?page=1&limit=200");
+        const items = data?.items || [];
 
-        setEsp(dEsp.items || []);
-        setCortos(dCorto.items || []);
+        const esps = [];
+        const shorts = [];
+
+        for (const c of items) {
+          const cat = normCat(c.categoria);
+
+          if (cat.includes("especializacion") || cat.includes("area de especializacion")) {
+            esps.push(c);
+          } else if (cat.includes("curso corto") || cat.includes("corto")) {
+            shorts.push(c);
+          }
+        }
+
+        setEsp(esps);
+        setCortos(shorts);
       } catch (e) {
         console.error(e);
         setError(e.message || "No se pudo cargar la oferta educativa.");
@@ -78,25 +102,17 @@ export default function Oferta() {
 
       {!loading && !error && (
         <>
-          {/* Áreas de especialización */}
           {esp.length > 0 && (
             <section className="oferta-section">
-              <h2 className="section-subtitle-title">
-                Áreas de especialización
-              </h2>
+              <h2 className="section-subtitle-title">Áreas de especialización</h2>
               <div className="oferta-grid">
                 {esp.map((c) => (
-                  <CourseCard
-                    key={c.id}
-                    course={c}
-                    variant="especializacion"
-                  />
+                  <CourseCard key={c.id} course={c} variant="especializacion" />
                 ))}
               </div>
             </section>
           )}
 
-          {/* Cursos cortos */}
           {cortos.length > 0 && (
             <section className="oferta-section">
               <h2 className="section-subtitle-title">Cursos cortos</h2>
@@ -106,6 +122,10 @@ export default function Oferta() {
                 ))}
               </div>
             </section>
+          )}
+
+          {esp.length === 0 && cortos.length === 0 && (
+            <p>No hay cursos disponibles por ahora.</p>
           )}
         </>
       )}
