@@ -1,23 +1,32 @@
 :root {
-  /* Paleta base */
-  --bg: #f4f5fb;
+  /* Paleta institucional UNIDET */
+  --bg: #eef7f8;
   --panel: #ffffff;
-  --borde: #e5e7eb;
-  --texto: #111827;
-  --tenue: #6b7280;
-  --accent: #f0b454;
-  --accent-ink: #5b4806;
+  --borde: #d5e5e8;
+  --texto: #0f172a;
+  --tenue: #5f6f7a;
 
-  /* Paleta morada UNIDET */
-  --uni-primary: #7540ff;
-  --uni-primary-soft: #efe7ff;
-  --uni-primary-dark: #4b24c9;
+  /* Acentos del logo */
+  --accent: #d6d94a;
+  --accent-ink: #4b4d05;
+
+  /* Azul / turquesa institucional */
+  --uni-primary: #0f7f95;
+  --uni-primary-soft: #e1f6f8;
+  --uni-primary-dark: #07566a;
+
+  /* Verde lima institucional */
+  --uni-lime: #c9d94a;
+  --uni-lime-soft: #f3f7d6;
+
+  /* Azul profundo para admin */
+  --uni-navy: #073b4c;
 
   --header-h: 72px;
   --container-w: 1180px;
   --radius: 14px;
-  --shadow: 0 10px 24px rgba(0, 0, 0, 0.1);
-  --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.06);
+  --shadow: 0 10px 24px rgba(7, 59, 76, 0.12);
+  --shadow-soft: 0 4px 12px rgba(7, 59, 76, 0.08);
 }
 
 * {
@@ -206,12 +215,22 @@ body {
 }
 
 .btn-danger {
-  border: 1px solid #fca5a5;
-  background: #fee2e2;
+  border: 1px solid #dc2626;
+  background: #dc2626;
+  color: #ffffff;
+  box-shadow: 0 14px 30px rgba(220, 38, 38, 0.25);
 }
 
 .btn-danger:hover {
-  background: #fecaca;
+  background: #b91c1c;
+  border-color: #b91c1c;
+  color: #ffffff;
+  box-shadow: 0 18px 40px rgba(220, 38, 38, 0.35);
+}
+
+.btn-danger:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.28);
 }
 
 /* ===================== */
@@ -959,3 +978,875 @@ body {
 .admin-form-actions {
   margin-top: 1.3rem;
 }
+
+/* =============================== */
+/*  MENSAJES DEL PANEL ADMIN       */
+/* =============================== */
+
+.admin-alert {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  width: 100%;
+  margin: 1rem 0 1.25rem;
+  padding: 0.85rem 1rem;
+  border-radius: 14px;
+  border: 1px solid transparent;
+  font-size: 0.92rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.admin-alert-success {
+  background: #ecfdf3;
+  border-color: #bbf7d0;
+  color: #166534;
+}
+
+.admin-alert-error {
+  background: #fef2f2;
+  border-color: #fecaca;
+  color: #991b1b;
+}
+
+.admin-alert-info {
+  background: #eff6ff;
+  border-color: #bfdbfe;
+  color: #1e40af;
+}
+
+.admin-alert-close {
+  border: none;
+  background: transparent;
+  color: inherit;
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0.1rem 0.25rem;
+  opacity: 0.75;
+}
+
+.admin-alert-close:hover {
+  opacity: 1;
+}
+
+/* Estado visible/oculto dentro del panel admin */
+.admin-status-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.28rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  border: 1px solid transparent;
+}
+
+.admin-status-visible {
+  background: #ecfdf3;
+  border-color: #bbf7d0;
+  color: #166534;
+}
+
+.admin-status-hidden {
+  background: #f3f4f6;
+  border-color: #d1d5db;
+  color: #4b5563;
+}
+
+/* Botones deshabilitados durante carga */
+.btn:disabled,
+.btn-secondary:disabled,
+.btn-danger:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* =============================== */
+/*  AJUSTE VISUAL UNIDET 2026      */
+/*  Paleta institucional + pulido  */
+/* =============================== */
+
+body {
+  background:
+    radial-gradient(circle at top left, rgba(201, 217, 74, 0.2), transparent 32rem),
+    radial-gradient(circle at top right, rgba(15, 127, 149, 0.18), transparent 28rem),
+    linear-gradient(180deg, #f7fbfc 0%, var(--bg) 42%, #edf5f6 100%);
+}
+
+/* Header con efecto vidrio suave */
+.header {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  border-bottom-color: rgba(15, 127, 149, 0.12);
+}
+
+.header .container {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.header .logo img {
+  filter: drop-shadow(0 8px 16px rgba(7, 59, 76, 0.08));
+}
+
+.titulo {
+  color: var(--texto);
+}
+
+/* Navegación pública más institucional */
+.topnav {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(15, 127, 149, 0.14);
+}
+
+.topnav .container {
+  padding: 12px 20px;
+}
+
+.toplink {
+  background: rgba(255, 255, 255, 0.78);
+  border-color: rgba(15, 127, 149, 0.15);
+  box-shadow: 0 8px 20px rgba(7, 59, 76, 0.04);
+}
+
+.toplink:hover {
+  background: var(--uni-primary-soft);
+  border-color: rgba(15, 127, 149, 0.35);
+  color: var(--uni-primary-dark);
+  transform: translateY(-1px);
+}
+
+.toplink.active {
+  background: linear-gradient(135deg, #ffffff, var(--uni-primary-soft));
+  border-color: var(--uni-primary);
+  box-shadow:
+    0 0 0 2px rgba(15, 127, 149, 0.18) inset,
+    0 12px 24px rgba(7, 59, 76, 0.08);
+  color: var(--uni-primary-dark);
+}
+
+/* Botón principal */
+.btn {
+  background: linear-gradient(135deg, var(--uni-primary), var(--uni-primary-dark));
+  box-shadow: 0 14px 30px rgba(15, 127, 149, 0.28);
+}
+
+.btn:hover {
+  background: linear-gradient(135deg, var(--uni-primary-dark), #043847);
+  box-shadow: 0 18px 40px rgba(15, 127, 149, 0.38);
+}
+
+/* Botón secundario */
+.btn-secondary,
+.btn.btn-secondary {
+  background: #f8fbfc;
+  border: 1px solid #c9dce1;
+  color: var(--uni-primary-dark);
+  box-shadow: none;
+}
+
+.btn-secondary:hover,
+.btn.btn-secondary:hover {
+  background: var(--uni-primary-soft);
+  border-color: rgba(15, 127, 149, 0.35);
+  color: var(--uni-primary-dark);
+}
+
+/* Mantener botón eliminar en rojo aunque el botón principal sea turquesa */
+.btn-danger,
+.btn.btn-danger {
+  border: 1px solid #dc2626;
+  background: linear-gradient(135deg, #dc2626, #b91c1c);
+  color: #ffffff;
+  box-shadow: 0 14px 30px rgba(220, 38, 38, 0.22);
+}
+
+.btn-danger:hover,
+.btn.btn-danger:hover {
+  background: linear-gradient(135deg, #b91c1c, #991b1b);
+  border-color: #991b1b;
+  color: #ffffff;
+  box-shadow: 0 18px 40px rgba(220, 38, 38, 0.32);
+}
+
+/* Cards más vivas y limpias */
+.card,
+.panel,
+.admin-form-card {
+  background: rgba(255, 255, 255, 0.94);
+  border-color: rgba(15, 127, 149, 0.14);
+  box-shadow: 0 20px 45px rgba(7, 59, 76, 0.08);
+}
+
+.card:hover {
+  border-color: rgba(15, 127, 149, 0.35);
+  box-shadow: 0 24px 55px rgba(7, 59, 76, 0.14);
+}
+
+.card-title {
+  color: var(--texto);
+}
+
+.card-text,
+.section-subtitle,
+.muted {
+  color: var(--tenue);
+}
+
+/* Títulos con más presencia */
+.content h1,
+.section-title,
+.page-title {
+  color: var(--texto);
+  letter-spacing: -0.04em;
+}
+
+.section-badge {
+  background: linear-gradient(135deg, var(--uni-primary-soft), var(--uni-lime-soft));
+  color: var(--uni-primary-dark);
+  border: 1px solid rgba(15, 127, 149, 0.12);
+}
+
+/* Home / Hero */
+.hero-kicker {
+  color: var(--uni-primary-dark);
+}
+
+.hero-tag-pill {
+  background: linear-gradient(135deg, var(--uni-primary-soft), var(--uni-lime-soft));
+  color: var(--uni-primary-dark);
+  border: 1px solid rgba(15, 127, 149, 0.1);
+}
+
+.laptop-mock {
+  background:
+    radial-gradient(circle at top left, rgba(201, 217, 74, 0.32), transparent 18rem),
+    linear-gradient(140deg, #f8ffff, #dff3f6);
+  box-shadow: 0 26px 60px rgba(7, 59, 76, 0.18);
+}
+
+.laptop-pill {
+  background: var(--uni-lime-soft);
+  color: var(--accent-ink);
+}
+
+/* Oferta educativa con colores más cercanos a la marca */
+.oferta-card--especializacion {
+  --oferta-color: var(--uni-primary);
+}
+
+.oferta-card--corto {
+  --oferta-color: var(--uni-lime);
+}
+
+.oferta-chip--especializacion {
+  background: var(--uni-primary-soft);
+  color: var(--uni-primary-dark);
+}
+
+.oferta-chip--corto {
+  background: var(--uni-lime-soft);
+  color: var(--accent-ink);
+}
+
+/* Admisiones */
+.admision-step-number {
+  background: radial-gradient(circle at 0 0, var(--uni-lime), var(--uni-primary));
+  box-shadow: 0 8px 20px rgba(15, 127, 149, 0.32);
+}
+
+/* FAQ */
+.faq-more-btn {
+  border-color: var(--uni-primary);
+  color: var(--uni-primary-dark);
+}
+
+.faq-more-btn:hover {
+  background: var(--uni-primary-soft);
+}
+
+/* Formularios admin más consistentes */
+.admin-form input[type="text"],
+.admin-form input[type="number"],
+.admin-form input[type="email"],
+.admin-form input[type="password"],
+.admin-form textarea,
+.admin-form select {
+  border-color: #c9dce1;
+  background: #f8fbfc;
+}
+
+.admin-form input:focus,
+.admin-form textarea:focus,
+.admin-form select:focus {
+  border-color: var(--uni-primary);
+  box-shadow: 0 0 0 3px rgba(15, 127, 149, 0.14);
+  background: #ffffff;
+}
+
+.admin-checkbox {
+  background: rgba(15, 127, 149, 0.08);
+}
+
+.admin-checkbox input[type="checkbox"] {
+  accent-color: var(--uni-primary);
+}
+
+/* Alertas del panel admin con paleta UNIDET */
+.admin-alert-info {
+  background: #e1f6f8;
+  border-color: #a7dce4;
+  color: #07566a;
+}
+
+.admin-alert-success {
+  background: #f3f7d6;
+  border-color: #d6d94a;
+  color: #4b4d05;
+}
+
+.admin-alert-error {
+  background: #fef2f2;
+  border-color: #fecaca;
+  color: #991b1b;
+}
+
+/* Estados visible / oculto */
+.admin-status-visible {
+  background: #f3f7d6;
+  border-color: #d6d94a;
+  color: #4b4d05;
+}
+
+.admin-status-hidden {
+  background: #eef5f6;
+  border-color: #c9dce1;
+  color: #52636d;
+}
+
+/* Dashboard y panel admin */
+.admin-page {
+  max-width: 1240px;
+}
+
+.admin-grid {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.15rem;
+}
+
+.admin-nav-clean {
+  border-color: rgba(15, 127, 149, 0.16) !important;
+  background: rgba(255, 255, 255, 0.92) !important;
+  backdrop-filter: blur(12px);
+}
+
+/* Botón flotante admin */
+.admin-fab {
+  background: var(--uni-navy);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.admin-fab:hover {
+  background: #032f3f;
+}
+
+/* Tablas admin más limpias */
+.admin-table {
+  background: rgba(255, 255, 255, 0.94);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 18px 40px rgba(7, 59, 76, 0.06);
+}
+
+.admin-table thead {
+  background: linear-gradient(135deg, var(--uni-primary-soft), #f8fbfc);
+}
+
+.admin-table th {
+  color: var(--uni-primary-dark);
+}
+
+.admin-table tr:hover td {
+  background: rgba(225, 246, 248, 0.45);
+}
+
+/* Contacto */
+.contact-card {
+  border-color: rgba(15, 127, 149, 0.14);
+}
+
+.contact-social-list a,
+.contact-block a {
+  color: var(--uni-primary-dark);
+  font-weight: 700;
+}
+
+/* Footer */
+.footer {
+  background: rgba(255, 255, 255, 0.9);
+  border-top-color: rgba(15, 127, 149, 0.12);
+}
+
+/* Mejoras responsivas ligeras */
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .admisiones-grid,
+  .faq-page .faq-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .topnav .container {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .grid,
+  .cards-grid,
+  .cards-grid.two,
+  .cards-grid.four,
+  .admisiones-grid,
+  .faq-page .faq-grid,
+  .contact-grid,
+  .contact-cols {
+    grid-template-columns: 1fr;
+  }
+
+  .content h1 {
+    font-size: 2rem;
+  }
+
+  .toplink {
+    padding: 12px 14px;
+  }
+}
+
+/* ===================================================== */
+/*  AJUSTE VISUAL 2 — FONDO AZUL + TAMAÑOS MÁS GRANDES   */
+/* ===================================================== */
+
+:root {
+  --bg: #dceff4;
+  --panel: #ffffff;
+  --borde: #bfdde5;
+  --texto: #071827;
+  --tenue: #536b78;
+
+  --uni-primary: #087f94;
+  --uni-primary-soft: #dff5f8;
+  --uni-primary-dark: #06495a;
+
+  --uni-lime: #cddc49;
+  --uni-lime-soft: #f1f7c9;
+
+  --header-h: 92px;
+  --container-w: 1320px;
+}
+
+/* Fondo general más vivo */
+body {
+  background:
+    radial-gradient(circle at 10% 12%, rgba(205, 220, 73, 0.32), transparent 28rem),
+    radial-gradient(circle at 85% 10%, rgba(8, 127, 148, 0.28), transparent 32rem),
+    linear-gradient(135deg, #e8f6f8 0%, #d5ebf1 45%, #c7e1ea 100%);
+  color: var(--texto);
+}
+
+/* Contenido con más aire vertical */
+.content {
+  min-height: calc(100vh - var(--header-h));
+  padding: 44px 0 60px;
+}
+
+/* Header más grande y más institucional */
+.header {
+  min-height: var(--header-h);
+  background: rgba(255, 255, 255, 0.94);
+  border-bottom: 1px solid rgba(8, 127, 148, 0.18);
+  box-shadow: 0 12px 30px rgba(7, 59, 76, 0.08);
+  backdrop-filter: blur(14px);
+}
+
+.header .container {
+  height: var(--header-h);
+  max-width: var(--container-w);
+  padding: 0 28px;
+}
+
+/* Logo más grande */
+.header .logo img {
+  height: 78px;
+  width: auto;
+  filter: drop-shadow(0 8px 14px rgba(7, 59, 76, 0.12));
+}
+
+.titulo {
+  font-size: 1.25rem;
+  font-weight: 950;
+}
+
+/* Barra pública más amplia */
+.topnav {
+  top: var(--header-h);
+  background: rgba(255, 255, 255, 0.9);
+  border-bottom: 1px solid rgba(8, 127, 148, 0.16);
+  box-shadow: 0 10px 25px rgba(7, 59, 76, 0.06);
+  backdrop-filter: blur(12px);
+}
+
+.topnav .container {
+  max-width: var(--container-w);
+  padding: 14px 28px;
+  gap: 14px;
+}
+
+/* Botones del menú más grandes */
+.toplink {
+  padding: 19px 24px;
+  font-size: 1.02rem;
+  font-weight: 750;
+  background: rgba(255, 255, 255, 0.82);
+  border-color: rgba(8, 127, 148, 0.18);
+  box-shadow: 0 8px 18px rgba(7, 59, 76, 0.05);
+}
+
+.toplink:hover {
+  background: #e8f7fa;
+  border-color: rgba(8, 127, 148, 0.42);
+  transform: translateY(-1px);
+}
+
+.toplink.active {
+  background: linear-gradient(135deg, #ffffff, #dff5f8);
+  border-color: var(--uni-primary);
+  color: var(--uni-primary-dark);
+  box-shadow:
+    0 0 0 2px rgba(8, 127, 148, 0.2) inset,
+    0 12px 24px rgba(8, 127, 148, 0.16);
+}
+
+/* Contenedores más anchos */
+.container,
+.content > .container,
+.content > section,
+.page,
+.admin-page {
+  max-width: var(--container-w);
+}
+
+/* Títulos más grandes y con más presencia */
+.content h1,
+.page-title,
+.section-title {
+  color: #071827;
+  letter-spacing: -0.04em;
+}
+
+.content h1 {
+  font-size: 3rem;
+  line-height: 1.08;
+}
+
+.section-title {
+  font-size: 2rem;
+}
+
+.section-subtitle,
+.content p {
+  color: var(--tenue);
+  font-size: 1.08rem;
+}
+
+/* Cards un poco más grandes */
+.card {
+  border-radius: 1.55rem;
+  padding: 1.75rem 2rem;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(8, 127, 148, 0.16);
+  box-shadow: 0 24px 55px rgba(7, 59, 76, 0.09);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(8, 127, 148, 0.38);
+  box-shadow: 0 28px 65px rgba(7, 59, 76, 0.16);
+}
+
+.card-title {
+  font-size: 1.18rem;
+  font-weight: 850;
+}
+
+.card-text {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* Grids con más separación */
+.grid,
+.cards-grid,
+.admin-grid,
+.faq-page .faq-grid,
+.oferta-grid,
+.admisiones-grid {
+  gap: 1.6rem;
+}
+
+/* Página FAQ más centrada y visual */
+.faq-page,
+.page {
+  padding-top: 42px;
+}
+
+.faq-hero h1,
+.page-header h1 {
+  font-size: 3rem;
+}
+
+/* Botones más sólidos */
+.btn {
+  padding: 0.82rem 1.85rem;
+  font-size: 1rem;
+  font-weight: 750;
+  background: linear-gradient(135deg, #0b8fa6, #06495a);
+  box-shadow: 0 16px 34px rgba(8, 127, 148, 0.28);
+}
+
+.btn:hover {
+  background: linear-gradient(135deg, #087f94, #043847);
+  box-shadow: 0 20px 46px rgba(8, 127, 148, 0.38);
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.82);
+  color: var(--uni-primary-dark);
+  border: 1px solid rgba(8, 127, 148, 0.22);
+}
+
+.btn-secondary:hover {
+  background: #e1f6f8;
+  border-color: rgba(8, 127, 148, 0.42);
+}
+
+/* Dashboard/admin más limpio sobre fondo azul */
+.admin-page {
+  padding: 0 28px;
+}
+
+.admin-nav-clean {
+  background: rgba(255, 255, 255, 0.94) !important;
+  border-color: rgba(8, 127, 148, 0.18) !important;
+  box-shadow: 0 18px 40px rgba(7, 59, 76, 0.1) !important;
+}
+
+/* Dashboard: cards más visibles */
+.admin-page .card {
+  min-height: 180px;
+}
+
+/* Badges institucionales */
+.section-badge {
+  background: linear-gradient(135deg, #e1f6f8, #f1f7c9);
+  color: var(--uni-primary-dark);
+  border: 1px solid rgba(8, 127, 148, 0.12);
+}
+
+/* Admisiones: número con colores del logo */
+.admision-step-number {
+  background: radial-gradient(circle at 0 0, #eaf28b, #0b8fa6);
+  box-shadow: 0 10px 24px rgba(8, 127, 148, 0.35);
+}
+
+/* Tarjetas de admisión más grandes */
+.admision-card {
+  padding: 1.75rem 1.9rem;
+  min-height: 190px;
+}
+
+/* Imágenes más vistosas */
+.course-card-image,
+.oferta-card-image,
+.contact-hero {
+  box-shadow: 0 18px 40px rgba(7, 59, 76, 0.12);
+}
+
+/* Formularios admin más cómodos */
+.admin-form input[type="text"],
+.admin-form input[type="number"],
+.admin-form input[type="email"],
+.admin-form input[type="password"],
+.admin-form textarea,
+.admin-form select {
+  padding: 0.65rem 0.85rem;
+  font-size: 1rem;
+  border-color: rgba(8, 127, 148, 0.24);
+  background: rgba(255, 255, 255, 0.9);
+}
+
+/* Botón flotante más integrado */
+.admin-fab {
+  background: linear-gradient(135deg, #06495a, #032f3f);
+  box-shadow: 0 18px 42px rgba(7, 59, 76, 0.35);
+}
+
+/* Ajuste para pantallas medianas */
+@media (max-width: 1100px) {
+  :root {
+    --header-h: 84px;
+  }
+
+  .header .logo img {
+    height: 68px;
+  }
+
+  .toplink {
+    padding: 15px 18px;
+    font-size: 0.95rem;
+  }
+
+  .content h1,
+  .faq-hero h1,
+  .page-header h1 {
+    font-size: 2.4rem;
+  }
+}
+/* ===================================================== */
+/*  FILTROS DEL PANEL ADMIN                              */
+/* ===================================================== */
+
+.admin-filters {
+  display: grid;
+  grid-template-columns: minmax(260px, 1fr) minmax(180px, 240px);
+  gap: 1rem;
+  align-items: end;
+  margin: 1rem 0 1.5rem;
+  padding: 1rem;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(8, 127, 148, 0.16);
+  box-shadow: 0 18px 40px rgba(7, 59, 76, 0.07);
+}
+
+.admin-filters label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.82rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #06495a;
+}
+
+.admin-filters input,
+.admin-filters select {
+  width: 100%;
+  border-radius: 999px;
+  border: 1px solid rgba(8, 127, 148, 0.24);
+  padding: 0.72rem 1rem;
+  font-size: 0.95rem;
+  background: #ffffff;
+  color: #071827;
+  outline: none;
+}
+
+.admin-filters input:focus,
+.admin-filters select:focus {
+  border-color: var(--uni-primary);
+  box-shadow: 0 0 0 3px rgba(8, 127, 148, 0.16);
+}
+
+.admin-results-note {
+  margin: 0.25rem 0 1rem;
+  color: var(--tenue);
+  font-size: 0.95rem;
+}
+
+@media (max-width: 760px) {
+  .admin-filters {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===================================================== */
+/*  MODAL DE CONFIRMACIÓN ADMIN                          */
+/* ===================================================== */
+
+.admin-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: rgba(3, 47, 63, 0.48);
+  backdrop-filter: blur(8px);
+}
+
+.admin-modal {
+  width: min(100%, 460px);
+  border-radius: 26px;
+  padding: 1.8rem;
+  background: rgba(255, 255, 255, 0.98);
+  border: 1px solid rgba(8, 127, 148, 0.18);
+  box-shadow: 0 28px 75px rgba(7, 59, 76, 0.32);
+  animation: adminModalIn 0.18s ease-out;
+}
+
+.admin-modal-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  background: #fee2e2;
+  color: #b91c1c;
+  font-size: 1.5rem;
+  font-weight: 900;
+  border: 1px solid #fecaca;
+}
+
+.admin-modal-content h2 {
+  margin: 0 0 0.45rem;
+  font-size: 1.35rem;
+  color: #071827;
+}
+
+.admin-modal-content p {
+  margin: 0;
+  color: #536b78;
+  line-height: 1.5;
+  font-size: 0.98rem;
+}
+
+.admin-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+
+@keyframes adminModalIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+

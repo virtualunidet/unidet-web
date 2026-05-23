@@ -23,14 +23,15 @@ import AdminServicios from "./pages/AdminServicios.jsx";
 import AdminEventos from "./pages/AdminEventos.jsx";
 import AdminCursos from "./pages/AdminCursos.jsx";
 import AdminAdmisiones from "./pages/AdminAdmisiones.jsx";
-import AdminUsers from "./pages/AdminUsers.jsx"; // 👈 NUEVO
+import AdminUsers from "./pages/AdminUsers.jsx";
+import AdminDashboard from "./pages/AdminDashboard.jsx";
 
 import { getAdminToken, getAdminUser } from "./services/api";
 
 // ================================================
 //  Botón flotante admin
 //  - Si NO hay token admin -> /admin (login)
-//  - Si SÍ hay token admin -> /admin/noticias
+//  - Si SÍ hay token admin -> /admin/dashboard
 // ================================================
 function AdminShortcut() {
   const location = useLocation();
@@ -39,7 +40,7 @@ function AdminShortcut() {
   if (isAdminRoute) return null;
 
   const hasAdminToken = !!getAdminToken();
-  const target = hasAdminToken ? "/admin/noticias" : "/admin";
+  const target = hasAdminToken ? "/admin/dashboard" : "/admin";
 
   return (
     <Link to={target} className="admin-fab">
@@ -59,18 +60,11 @@ function RequireAdmin({ children, onlySuperadmin = false }) {
   const location = useLocation();
 
   if (!token) {
-    return (
-      <Navigate
-        to="/admin"
-        state={{ from: location }}
-        replace
-      />
-    );
+    return <Navigate to="/admin" state={{ from: location }} replace />;
   }
 
   if (onlySuperadmin && (!user || user.role !== "superadmin")) {
-    // No es superadmin -> lo mandamos a la página principal del panel
-    return <Navigate to="/admin/noticias" replace />;
+    return <Navigate to="/admin/dashboard" replace />;
   }
 
   return children;
@@ -103,7 +97,7 @@ export default function App() {
             path="/admin"
             element={
               getAdminToken() ? (
-                <Navigate to="/admin/noticias" replace />
+                <Navigate to="/admin/dashboard" replace />
               ) : (
                 <AdminLogin />
               )
@@ -116,7 +110,17 @@ export default function App() {
             element={<Navigate to="/admin" replace />}
           />
 
-          {/* Panel admin (protegido con token admin / superadmin) */}
+          {/* Dashboard admin */}
+          <Route
+            path="/admin/dashboard"
+            element={
+              <RequireAdmin>
+                <AdminDashboard />
+              </RequireAdmin>
+            }
+          />
+
+          {/* Panel admin */}
           <Route
             path="/admin/noticias"
             element={
@@ -125,6 +129,7 @@ export default function App() {
               </RequireAdmin>
             }
           />
+
           <Route
             path="/admin/servicios"
             element={
@@ -133,6 +138,7 @@ export default function App() {
               </RequireAdmin>
             }
           />
+
           <Route
             path="/admin/eventos"
             element={
@@ -141,6 +147,7 @@ export default function App() {
               </RequireAdmin>
             }
           />
+
           <Route
             path="/admin/cursos"
             element={
@@ -149,6 +156,7 @@ export default function App() {
               </RequireAdmin>
             }
           />
+
           <Route
             path="/admin/admisiones"
             element={
@@ -157,6 +165,7 @@ export default function App() {
               </RequireAdmin>
             }
           />
+
           <Route
             path="/admin/reglamento"
             element={
@@ -165,6 +174,7 @@ export default function App() {
               </RequireAdmin>
             }
           />
+
           <Route
             path="/admin/contacto"
             element={
@@ -173,6 +183,7 @@ export default function App() {
               </RequireAdmin>
             }
           />
+
           <Route
             path="/admin/faq"
             element={

@@ -2,14 +2,34 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { clearAdminAuth, getAdminUser } from "../services/api";
 
+const MODULE_LABELS = {
+  "/admin/dashboard": "Dashboard",
+  "/admin/admisiones": "Admisiones",
+  "/admin/cursos": "Oferta educativa",
+  "/admin/servicios": "Servicios",
+  "/admin/noticias": "Noticias",
+  "/admin/eventos": "Calendario",
+  "/admin/reglamento": "Reglamento",
+  "/admin/contacto": "Contacto",
+  "/admin/faq": "FAQ",
+  "/admin/usuarios": "Administradores",
+};
+
+function getCurrentModule(pathname) {
+  const found = Object.entries(MODULE_LABELS).find(([path]) =>
+    pathname.startsWith(path)
+  );
+
+  return found ? found[1] : "Panel administrador";
+}
+
 function AdminNav() {
   const location = useLocation();
   const navigate = useNavigate();
 
   const adminUser = getAdminUser();
-  const isSuperadmin = adminUser?.role === "superadmin";
-
-  const isActive = (path) => location.pathname.startsWith(path);
+  const isDashboard = location.pathname.startsWith("/admin/dashboard");
+  const currentModule = getCurrentModule(location.pathname);
 
   const handleLogout = () => {
     clearAdminAuth();
@@ -17,166 +37,114 @@ function AdminNav() {
   };
 
   return (
-    <header
-      className="admin-nav"
+    <div
+      className="admin-nav admin-nav-clean"
       style={{
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
-        gap: "1.5rem",
-        padding: "0.75rem 1.5rem",
-        marginBottom: "1.25rem",
-        backgroundColor: "#003366",
-        color: "#fff",
-        borderRadius: "999px",
+        gap: "1rem",
+        padding: "0.85rem 1.15rem",
+        marginBottom: "1.5rem",
+        backgroundColor: "#ffffff",
+        border: "1px solid #e5e7eb",
+        borderRadius: "18px",
+        boxShadow: "0 14px 30px rgba(15, 23, 42, 0.06)",
       }}
     >
-      <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-        <button
-          type="button"
-          onClick={() => navigate("/admin/noticias")}
-          style={{
-            border: "none",
-            background: "transparent",
-            color: "#fff",
-            fontWeight: "bold",
-            fontSize: "1rem",
-            cursor: "pointer",
-          }}
-        >
-          UNIDET Admin
-        </button>
-
-        <nav style={{ display: "flex", gap: "0.75rem" }}>
+      <div style={{ display: "flex", alignItems: "center", gap: "0.85rem" }}>
+        {!isDashboard && (
           <Link
-            to="/admin/admisiones"
+            to="/admin/dashboard"
+            className="btn btn-secondary"
             style={{
-              color: isActive("/admin/admisiones") ? "#ffcc00" : "#fff",
+              padding: "0.55rem 1rem",
+              boxShadow: "none",
               textDecoration: "none",
-              fontWeight: isActive("/admin/admisiones") ? "bold" : "normal",
             }}
           >
-            Admisiones
+            ← Volver al dashboard
           </Link>
+        )}
 
-          <Link
-            to="/admin/cursos"
+        {isDashboard && (
+          <button
+            type="button"
+            onClick={() => navigate("/admin/dashboard")}
             style={{
-              color: isActive("/admin/cursos") ? "#ffcc00" : "#fff",
-              textDecoration: "none",
-              fontWeight: isActive("/admin/cursos") ? "bold" : "normal",
+              border: "none",
+              background: "transparent",
+              color: "#111827",
+              fontWeight: "900",
+              fontSize: "1rem",
+              cursor: "pointer",
+              padding: 0,
             }}
           >
-            Oferta
-          </Link>
+            UNIDET Admin
+          </button>
+        )}
 
-          <Link
-            to="/admin/servicios"
+        <div>
+          <p
             style={{
-              color: isActive("/admin/servicios") ? "#ffcc00" : "#fff",
-              textDecoration: "none",
-              fontWeight: isActive("/admin/servicios") ? "bold" : "normal",
+              margin: 0,
+              fontSize: "0.78rem",
+              color: "#6b7280",
+              fontWeight: 700,
+              textTransform: "uppercase",
+              letterSpacing: "0.06em",
             }}
           >
-            Servicios
-          </Link>
+            Módulo actual
+          </p>
 
-          <Link
-            to="/admin/noticias"
+          <strong
             style={{
-              color: isActive("/admin/noticias") ? "#ffcc00" : "#fff",
-              textDecoration: "none",
-              fontWeight: isActive("/admin/noticias") ? "bold" : "normal",
+              display: "block",
+              color: "#111827",
+              fontSize: "1rem",
+              lineHeight: 1.2,
             }}
           >
-            Noticias
-          </Link>
-
-          <Link
-            to="/admin/eventos"
-            style={{
-              color: isActive("/admin/eventos") ? "#ffcc00" : "#fff",
-              textDecoration: "none",
-              fontWeight: isActive("/admin/eventos") ? "bold" : "normal",
-            }}
-          >
-            Calendario
-          </Link>
-
-          <Link
-            to="/admin/reglamento"
-            style={{
-              color: isActive("/admin/reglamento") ? "#ffcc00" : "#fff",
-              textDecoration: "none",
-              fontWeight: isActive("/admin/reglamento") ? "bold" : "normal",
-            }}
-          >
-            Reglamento
-          </Link>
-
-          <Link
-            to="/admin/contacto"
-            style={{
-              color: isActive("/admin/contacto") ? "#ffcc00" : "#fff",
-              textDecoration: "none",
-              fontWeight: isActive("/admin/contacto") ? "bold" : "normal",
-            }}
-          >
-            Contacto
-          </Link>
-
-          <Link
-            to="/admin/faq"
-            style={{
-              color: isActive("/admin/faq") ? "#ffcc00" : "#fff",
-              textDecoration: "none",
-              fontWeight: isActive("/admin/faq") ? "bold" : "normal",
-            }}
-          >
-            FAQ
-          </Link>
-
-          {isSuperadmin && (
-            <Link
-              to="/admin/usuarios"
-              style={{
-                color: isActive("/admin/usuarios") ? "#ffcc00" : "#fff",
-                textDecoration: "none",
-                fontWeight: isActive("/admin/usuarios") ? "bold" : "normal",
-              }}
-            >
-              Admins
-            </Link>
-          )}
-        </nav>
+            {currentModule}
+          </strong>
+        </div>
       </div>
 
       <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
         {adminUser && (
-          <span style={{ fontSize: "0.85rem", opacity: 0.9 }}>
+          <span
+            style={{
+              fontSize: "0.85rem",
+              color: "#374151",
+              textAlign: "right",
+            }}
+          >
             Bienvenido,&nbsp;
-            <strong>{adminUser.name}</strong>{" "}
-            {adminUser.role === "superadmin" && "(superadmin)"}
+            <strong>{adminUser.name || adminUser.nombre || "Admin"}</strong>
+            {adminUser.role === "superadmin" && (
+              <span style={{ color: "#6b4df5", fontWeight: 700 }}>
+                {" "}
+                · superadmin
+              </span>
+            )}
           </span>
         )}
 
         <button
           type="button"
           onClick={handleLogout}
+          className="btn btn-danger"
           style={{
-            borderRadius: "999px",
-            border: "1px solid #fff",
-            padding: "0.3rem 0.9rem",
-            background: "transparent",
-            color: "#fff",
-            cursor: "pointer",
-            fontSize: "0.9rem",
+            padding: "0.55rem 1rem",
+            boxShadow: "none",
           }}
         >
           Cerrar sesión
         </button>
       </div>
-    </header>
+    </div>
   );
 }
 
